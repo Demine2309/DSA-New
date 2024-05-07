@@ -4,10 +4,7 @@
     {
         static void Main(string[] args)
         {
-            string str = "abcldsf";
-            str += 'f';
-
-            Console.WriteLine(str);
+            Console.WriteLine(5 / 2);
         }
 
         public static int Print(int n)

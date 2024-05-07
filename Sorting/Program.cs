@@ -132,69 +132,69 @@ namespace DSA
     #endregion
 
     #region Shell Sort
-    class MainClass
-    {
-        static void Main(string[] args)
-        {
-            int[] arr = { 12, 5, 3, 6, 8, 213, 45, 2, 0, 23 };
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        int[] arr = { 12, 5, 3, 5, 5, 6, 8, 213, 45, 2, 0, 23 };
 
-            ShellSort(arr);
+    //        ShellSort(arr);
 
-            foreach (int i in arr)
-            {
-                Console.Write(i + " ");
-            }
-        }
+    //        foreach (int i in arr)
+    //        {
+    //            Console.Write(i + " ");
+    //        }
+    //    }
 
-        static void ShellSort(int[] arr)
-        {
-            int h = 3;
+    //    static void ShellSort(int[] arr)
+    //    {
+    //        int h = 3;
 
-            while(h > 0)
-            {
-                for(int i = h; i < arr.Length; i++)
-                {
-                    int temp = arr[i];
-                    int j = i;
+    //        while (h > 0)
+    //        {
+    //            for (int i = h; i < arr.Length; i++)
+    //            {
+    //                int temp = arr[i];
+    //                int j = i;
 
-                    while (j>=h && arr[j-h] > temp)
-                    {
-                        arr[j] = arr[j-h];
-                        j -= h;
-                    }
+    //                while (j >= h && arr[j - h] > temp)
+    //                {
+    //                    arr[j] = arr[j - h];
+    //                    j -= h;
+    //                }
 
-                    arr[j] = temp;
-                }
+    //                arr[j] = temp;
+    //            }
 
-                h = h / 2;
-            }
+    //            h = h / 2;
+    //        }
 
-            // Another way to execute this code
-            //while (h <= arr.Length / 9)
-            //{
-            //    h = 3 * h + 1;
-            //}
+    //        // Another way to execute this code
+    //        //while (h <= arr.Length / 9)
+    //        //{
+    //        //    h = 3 * h + 1;
+    //        //}
 
-            //while (h > 0)
-            //{
-            //    for (int i = h; i < arr.Length; i++)
-            //    {
-            //        int v = arr[i];
-            //        int j = i;
+    //        //while (h > 0)
+    //        //{
+    //        //    for (int i = h; i < arr.Length; i++)
+    //        //    {
+    //        //        int v = arr[i];
+    //        //        int j = i;
 
-            //        while (j >= h && arr[j - h] > v)
-            //        {
-            //            arr[j] = arr[j - h];
-            //            j -= h;
-            //        }
+    //        //        while (j >= h && arr[j - h] > v)
+    //        //        {
+    //        //            arr[j] = arr[j - h];
+    //        //            j -= h;
+    //        //        }
 
-            //        arr[j] = v;
-            //    }
+    //        //        arr[j] = v;
+    //        //    }
 
-            //    h /= 3;
-            //}
-        }
-    }
+    //        //    h /= 3;
+    //        //}
+    //    }
+    //}
 
     //// Best case complexity: O(n)
     //// Average case complexity depends on gap sequence
@@ -206,7 +206,7 @@ namespace DSA
     //{
     //    static void Main(string[] args)
     //    {
-    //        int[] arr = { 12, 5, 3, 6, 8, 213, 45, 2, 0, 23 };
+    //        int[] arr = { 9, 7, 8, 3, 2, 1 }; // 12, 5, 3, 6, 8, 213, 45, 2, 0, 23
     //        int[] temp = new int[arr.Length];
 
     //        MergeSort(arr, temp, 0, arr.Length - 1);
@@ -262,56 +262,56 @@ namespace DSA
     #endregion
 
     #region Quick Sort
-    //class MainClass
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        int[] arr = { 12, 5, 3, 6, 8, 213, 45, 2, 0, 23, -6 };
+    class MainClass
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 12, 5, 3, 6, 8, 213, 45, 2, 0, 23, -6 };
 
-    //        QuickSort(arr, 0, arr.Length - 1);
+            QuickSort(arr, 0, arr.Length - 1);
 
-    //        foreach (int i in arr)
-    //        {
-    //            Console.Write(i + "  ");
-    //        }
-    //    }
+            foreach (int i in arr)
+            {
+                Console.Write(i + "  ");
+            }
+        }
 
-    //    static void QuickSort(int[] arr, int low, int high)
-    //    {
-    //        if (high > low)
-    //        {
-    //            int pivot = Partition(arr, low, high);
-    //            QuickSort(arr, low, pivot - 1);
-    //            QuickSort(arr, pivot + 1, high);
-    //        }
-    //    }
+        static void QuickSort(int[] arr, int low, int high)
+        {
+            if (high > low)
+            {
+                int pivot = Partition(arr, low, high);
+                QuickSort(arr, low, pivot - 1);
+                QuickSort(arr, pivot + 1, high);
+            }
+        }
 
-    //    static int Partition(int[] arr, int low, int high)
-    //    {
-    //        int left, right, pivotItem = arr[low];
-    //        left = low;
-    //        right = high;
+        static int Partition(int[] arr, int low, int high)
+        {
+            int left, right, pivotItem = arr[low];
+            left = low;
+            right = high;
 
-    //        while (left < right)
-    //        {
-    //            while (arr[left] <= pivotItem)
-    //                left++;
-    //            while (arr[right] > pivotItem)
-    //                right--;
+            while (left < right)
+            {
+                while (arr[left] <= pivotItem)
+                    left++;
+                while (arr[right] > pivotItem)
+                    right--;
 
-    //            if (left < right)
-    //            {
-    //                int temp = arr[left];
-    //                arr[left] = arr[right];
-    //                arr[right] = temp;
-    //            }
-    //        }
+                if (left < right)
+                {
+                    int temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                }
+            }
 
-    //        arr[low] = arr[right];
-    //        arr[right] = pivotItem;
-    //        return right;
-    //    }
-    //}
+            arr[low] = arr[right];
+            arr[right] = pivotItem;
+            return right;
+        }
+    }
 
     //// Worst case Complexity: O(n^2)
     //// Best case Complexity: O(nlogn)
