@@ -5,7 +5,7 @@
     //{
     //    public int UnorderedLinearSearch(int[] arr, int data)
     //    {
-    //        for(int i = 0; i < arr.Length; i++)
+    //        for (int i = 0; i < arr.Length; i++)
     //        {
     //            if (arr[i] == data)
     //                return i;
@@ -35,7 +35,7 @@
     //{
     //    public int OrderedLinearSearch(int[] arr, int data)
     //    {
-    //        for(int i = 0; i < arr.Length; i++)
+    //        for (int i = 0; i < arr.Length; i++)
     //        {
     //            if (arr[i] == data)
     //                return i;
@@ -54,6 +54,7 @@
     //        Solution solution = new Solution();
 
     //        int[] arr = { 12, 5, 48, 5, 4, 13, 5, 4, 56, 1, 2, 84, 5, 1, 2, 4, 51, 5, 4, 5, 1, 54, 8, 48, 51 };
+    //        Array.Sort(arr);
 
     //        Console.WriteLine(solution.OrderedLinearSearch(arr, 23));
     //    }
@@ -98,8 +99,6 @@
     //            return BinarySearchRecursive(arr, mid + 1, high, data);
     //        else
     //            return BinarySearchRecursive(arr, low, mid - 1, data);
-
-    //        return -1;
     //    }
     //}
 
@@ -120,7 +119,7 @@
 
     //        //Console.WriteLine("\n" + solution.BinarySearchIterative(arr, 56));
 
-    //        Console.WriteLine("\n" + solution.BinarySearchRecursive(arr, 0, arr.Length - 1, 56));
+    //        Console.WriteLine("\n" + solution.BinarySearchRecursive(arr, 0, arr.Length - 1, 0));
     //    }
     //}
 

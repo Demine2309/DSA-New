@@ -103,74 +103,49 @@
     public class Solution
     {
         // First Way
-        //public void WhoWinTheElection(int[] arr)
-        //{
-        //    Dictionary<int, int> ID = new Dictionary<int, int>();
-
-        //    for (int i = 0; i < arr.Length; i++)
-        //    {
-        //        ID.Add(i + 1, arr[i]);
-        //    }
-
-        //    BucketSort(arr);
-
-        //    Console.WriteLine(GetKeyFromValue(ID, arr[arr.Length - 1]));
-        //}
-
-        //public void BucketSort(int[] arr)
-        //{
-        //    int[] buckets = new int[arr.Max() + 1];
-
-        //    for (int j = 0; j < buckets.Length; j++)
-        //        buckets[j] = 0;
-
-        //    for (int i = 0; i < arr.Length; i++)
-        //        buckets[arr[i]]++;
-
-        //    for (int i = 0, j = 0; j < buckets.Length; j++)
-        //    {
-        //        for (int k = buckets[j]; k > 0; k--)
-        //        {
-        //            arr[i] = j;
-        //            i++;
-        //        }
-        //    }
-        //}
-
-        //private TKey GetKeyFromValue<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TValue value)
-        //{
-        //    foreach (KeyValuePair<TKey, TValue> pair in dictionary)
-        //    {
-        //        if (pair.Value.Equals(value))
-        //            return pair.Key;
-        //    }
-
-        //    throw new Exception("Value not found in dictionary");
-        //}
-
-        // Second way
-        public int WhoWinTheElection(int[] arr)
+        public void WhoWinTheElection(int[] arr)
         {
-            int counter = 0, maxCounter = 0, candidate;
-            candidate = arr[0];
+            Dictionary<int, int> ID = new Dictionary<int, int>();
 
-            for(int i = 0;i<arr.Length;i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                candidate = arr[i];
-                counter = 0;
-                for(int j = i +1;j<arr.Length;j++)
-                {
-                    if (arr[i] == arr[j])
-                        counter++;
-                }
-                if(counter > maxCounter)
-                {
-                    maxCounter = counter;
-                    candidate = arr[i];
-                }
+                ID.Add(i + 1, arr[i]);
             }
 
-            return candidate;
+            BucketSort(arr);
+
+            Console.WriteLine(GetKeyFromValue(ID, arr[arr.Length - 1]));
+        }
+
+        public void BucketSort(int[] arr)
+        {
+            int[] buckets = new int[arr.Max() + 1];
+
+            for (int j = 0; j < buckets.Length; j++)
+                buckets[j] = 0;
+
+            for (int i = 0; i < arr.Length; i++)
+                buckets[arr[i]]++;
+
+            for (int i = 0, j = 0; j < buckets.Length; j++)
+            {
+                for (int k = buckets[j]; k > 0; k--)
+                {
+                    arr[i] = j;
+                    i++;
+                }
+            }
+        }
+
+        private TKey GetKeyFromValue<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TValue value)
+        {
+            foreach (KeyValuePair<TKey, TValue> pair in dictionary)
+            {
+                if (pair.Value.Equals(value))
+                    return pair.Key;
+            }
+
+            throw new Exception("Value not found in dictionary");
         }
     }
 
@@ -181,9 +156,7 @@
             Solution solution = new Solution();
             int[] arr = { 34, 54, 12, 4, 23, 65, 2, 87, 2, 6, 9, 24 };
 
-            //solution.WhoWinTheElection(arr);
-
-            Console.WriteLine(solution.WhoWinTheElection(arr));
+            solution.WhoWinTheElection(arr);
         }
     }
     #endregion
