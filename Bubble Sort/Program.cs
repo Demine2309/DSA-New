@@ -4,44 +4,44 @@
     public class Solution
     {
         #region Basic Bubble sort algorithm
-        //public int[] BubbleSort(int[] nums)
-        //{
-        //    int step = nums.Length - 1;
-        //    while (step > 0)
-        //    {
-        //        for (int i = 0; i < step; i++)
-        //        {
-        //            if (nums[i] > nums[i + 1])
-        //            {
-        //                Swap(nums, i, i + 1);
-        //            }
-        //        }
-        //        step--;
-        //    }
-
-        //    return nums;
-        //}
-        #endregion
-
-        #region Another way
         public int[] BubbleSort(int[] nums)
         {
-            int n = nums.Length;
-            while (n > 0)
+            int step = nums.Length - 1;
+            while (step > 0)
             {
-                for (int i = 0; i < n - 1; i++)
+                for (int i = 0; i < step; i++)
                 {
                     if (nums[i] > nums[i + 1])
                     {
                         Swap(nums, i, i + 1);
                     }
                 }
-
-                n--;
+                step--;
             }
 
             return nums;
         }
+        #endregion
+
+        #region Another way
+        //public int[] BubbleSort(int[] nums)
+        //{
+        //    int n = nums.Length;
+        //    while (n > 0)
+        //    {
+        //        for (int i = 0; i < n - 1; i++)
+        //        {
+        //            if (nums[i] > nums[i + 1])
+        //            {
+        //                Swap(nums, i, i + 1);
+        //            }
+        //        }
+
+        //        n--;
+        //    }
+
+        //    return nums;
+        //}
         #endregion
 
         #region Optimize this Algorithm

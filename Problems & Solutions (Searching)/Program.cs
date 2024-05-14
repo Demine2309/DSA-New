@@ -234,18 +234,103 @@
      * - For example: if the array is 4,2,4,5,2,3,1 with size = 7 and n = 5. This input has n + 2 = 7 elements with all 
      *                elements occurring once except 2 and 4 which occur twice. So the output should be 4 2.
      */
+    //public class Solution
+    //{
+    //    public List<int> FindingTwoRepeatingNumbers(int[] arr)
+    //    {
+    //        List<int> result = new List<int>();
+
+    //        Array.Sort(arr);
+
+    //        for (int i = 0; i < arr.Length - 1; i++)
+    //        {
+    //            if (arr[i] == arr[i + 1])
+    //                result.Add(arr[i]);
+    //        }
+
+    //        return result;
+    //    }
+
+    //    public void DisplayList(List<int> list)
+    //    {
+    //        for (int i = 0; i < list.Count; i++)
+    //        {
+    //            Console.Write(list[i] + "  ");
+    //        }
+
+    //        Console.WriteLine();
+    //    }
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+
+    //        int[] arr = { 4, 2, 4, 5, 2, 3, 1 };
+
+    //        solution.DisplayList(solution.FindingTwoRepeatingNumbers(arr));
+    //    }
+    //}
+    #endregion
+
+    #region Problem 24
+    /*
+     * - Problem: Similar to Problem-19, let us assume that the numbers are in the range 1 to n. Also, n – 1 elements 
+     *            are repeating thrice and remaining element repeated twice. Find the element which repeated twice.
+     */
     public class Solution
     {
-        
+        public int FindingElementRepeatedTwice(int[] arr)
+        {
+            Array.Sort(arr);
+
+            Dictionary<int, int> results = new Dictionary<int, int>();
+
+            int k = 1;
+
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                if (arr[i] == arr[i + 1])
+                    k++;
+                else if (arr[i] != arr[i + 1])
+                {
+                    results.Add(arr[i], k);
+                    k = 1;
+                }
+            }
+
+            foreach (int i in results.Values)
+            {
+                if (i == 2)
+                    return GetKeyFromValue(results, i);
+            }
+
+            return -1;
+        }
+
+        private TKey GetKeyFromValue<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TValue value)
+        {
+            foreach (KeyValuePair<TKey, TValue> pair in dictionary)
+            {
+                if (pair.Value.Equals(value))
+                    return pair.Key;
+            }
+
+            throw new Exception("Value not found in dictionary");
+        }
     }
-    
+
     class MainClass
     {
         static void Main(string[] args)
         {
             Solution solution = new Solution();
 
+            int[] arr = { 3, 2, 1, 1, 2, 3, 3, 1 };
 
+            Console.WriteLine(solution.FindingElementRepeatedTwice(arr));
         }
     }
     #endregion

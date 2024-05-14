@@ -34,7 +34,7 @@ namespace DSA
 
     //    static void BubbleSortImproved(int[] arr)
     //    {
-    //        int temp, swapped = 1;
+    //        int swapped = 1;
 
     //        for (int pass = arr.Length - 1; pass >= 0 && swapped == 1; pass--)
     //        {
@@ -43,7 +43,7 @@ namespace DSA
     //            {
     //                if (arr[i] > arr[i + 1])
     //                {
-    //                    temp = arr[i];
+    //                    int temp = arr[i];
     //                    arr[i] = arr[i + 1];
     //                    arr[i + 1] = temp;
     //                    swapped = 1;
@@ -80,9 +80,7 @@ namespace DSA
     //            for (int j = i + 1; j < arr.Length; j++)
     //            {
     //                if (arr[j] < arr[minPos])
-    //                {
     //                    minPos = j;
-    //                }
     //            }
 
     //            int temp = arr[minPos];
@@ -202,61 +200,61 @@ namespace DSA
     #endregion
 
     #region Merge Sort
-    //class MainClass
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        int[] arr = { 9, 7, 8, 3, 2, 1 }; // 12, 5, 3, 6, 8, 213, 45, 2, 0, 23
-    //        int[] temp = new int[arr.Length];
+    class MainClass
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 12, 5, 6, 18, 1 }; // 12, 5, 3, 6, 8, 213, 45, 2, 0, 23
+            int[] temp = new int[arr.Length];
 
-    //        MergeSort(arr, temp, 0, arr.Length - 1);
+            MergeSort(arr, temp, 0, arr.Length - 1);
 
-    //        foreach (int i in arr)
-    //        {
-    //            Console.Write(i + "  ");
-    //        }
-    //    }
+            foreach (int i in arr)
+            {
+                Console.Write(i + "  ");
+            }
+        }
 
-    //    static void MergeSort(int[] arr, int[] temp, int left, int right)
-    //    {
-    //        if (right > left)
-    //        {
-    //            int mid = (right + left) / 2;
-    //            MergeSort(arr, temp, left, mid);
-    //            MergeSort(arr, temp, mid + 1, right);
-    //            Merge(arr, temp, left, mid + 1, right);
-    //        }
-    //    }
+        static void MergeSort(int[] arr, int[] temp, int left, int right)
+        {
+            if (right > left)
+            {
+                int mid = (right + left) / 2;
+                MergeSort(arr, temp, left, mid);
+                MergeSort(arr, temp, mid + 1, right);
+                Merge(arr, temp, left, mid + 1, right);
+            }
+        }
 
-    //    static void Merge(int[] arr, int[] temp, int left, int mid, int right)
-    //    {
-    //        int leftEnd, size, tempPos;
+        static void Merge(int[] arr, int[] temp, int left, int mid, int right)
+        {
+            int leftEnd, size, tempPos;
 
-    //        leftEnd = mid - 1;
-    //        tempPos = left;
-    //        size = right - left + 1;
+            leftEnd = mid - 1;
+            tempPos = left;
+            size = right - left + 1;
 
-    //        while (left <= leftEnd && mid <= right)
-    //        {
-    //            if (arr[left] <= arr[mid])
-    //                temp[tempPos++] = arr[left++];
-    //            else
-    //                temp[tempPos++] = arr[mid++];
-    //        }
+            while (left <= leftEnd && mid <= right)
+            {
+                if (arr[left] <= arr[mid])
+                    temp[tempPos++] = arr[left++];
+                else
+                    temp[tempPos++] = arr[mid++];
+            }
 
-    //        while (left <= leftEnd)
-    //            temp[tempPos++] = arr[left++];
+            while (left <= leftEnd)
+                temp[tempPos++] = arr[left++];
 
-    //        while (mid <= right)
-    //            temp[tempPos++] = arr[mid++];
+            while (mid <= right)
+                temp[tempPos++] = arr[mid++];
 
-    //        for (int i = 0; i < size; i++)
-    //        {
-    //            arr[right] = temp[right];
-    //            right--;
-    //        }
-    //    }
-    //}
+            for (int i = 0; i < size; i++)
+            {
+                arr[right] = temp[right];
+                right--;
+            }
+        }
+    }
 
     //// Time complexity: In 3 cases is O(nlogn)
     #endregion
@@ -412,66 +410,66 @@ namespace DSA
     #endregion
 
     #region Radix Sort
-    public class Solution
-    {
-        public void RadixSort(int[] arr)
-        {
-            int maxVal = arr.Max();
-            int exp = 1; // Initialize the exponent for the current digit place
+    //public class Solution
+    //{
+    //    public void RadixSort(int[] arr)
+    //    {
+    //        int maxVal = arr.Max();
+    //        int exp = 1; // Initialize the exponent for the current digit place
 
-            while (maxVal / exp > 0)
-            {
-                int[] output = new int[arr.Length];
-                CountingSort(arr, output, maxVal + 1);
-                Array.Copy(output, arr, arr.Length);
+    //        while (maxVal / exp > 0)
+    //        {
+    //            int[] output = new int[arr.Length];
+    //            CountingSort(arr, output, maxVal + 1);
+    //            Array.Copy(output, arr, arr.Length);
 
-                exp *= 10;
-            }
-        }
+    //            exp *= 10;
+    //        }
+    //    }
 
-        private void CountingSort(int[] arr, int[] B, int k)
-        {
-            int[] temp = new int[k];
+    //    private void CountingSort(int[] arr, int[] B, int k)
+    //    {
+    //        int[] temp = new int[k];
 
-            for (int i = 0; i < k; i++)
-            {
-                temp[i] = 0;
-            }
+    //        for (int i = 0; i < k; i++)
+    //        {
+    //            temp[i] = 0;
+    //        }
 
-            for (int j = 0; j < arr.Length; j++)
-            {
-                temp[arr[j]] = temp[arr[j]] + 1;
-            }
+    //        for (int j = 0; j < arr.Length; j++)
+    //        {
+    //            temp[arr[j]] = temp[arr[j]] + 1;
+    //        }
 
-            for (int i = 1; i < k; i++)
-            {
-                temp[i] = temp[i] + temp[i - 1];
-            }
+    //        for (int i = 1; i < k; i++)
+    //        {
+    //            temp[i] = temp[i] + temp[i - 1];
+    //        }
 
-            for (int j = arr.Length - 1; j >= 0; j--)
-            {
-                B[temp[arr[j]] - 1] = arr[j];
-                temp[arr[j]] = temp[arr[j]] - 1;
-            }
-        }
-    }
+    //        for (int j = arr.Length - 1; j >= 0; j--)
+    //        {
+    //            B[temp[arr[j]] - 1] = arr[j];
+    //            temp[arr[j]] = temp[arr[j]] - 1;
+    //        }
+    //    }
+    //}
 
-    class MainClass
-    {
-        static void Main(string[] args)
-        {
-            Solution solution = new Solution();
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
 
-            int[] arr = { 12, 5, 3, 6, 8, 213, 45, 2, 0, 23 };
+    //        int[] arr = { 12, 5, 3, 6, 8, 213, 45, 2, 0, 23 };
 
-            solution.RadixSort(arr);
+    //        solution.RadixSort(arr);
 
-            foreach (int i in arr)
-            {
-                Console.Write(i + " ");
-            }
-        }
-    }
+    //        foreach (int i in arr)
+    //        {
+    //            Console.Write(i + " ");
+    //        }
+    //    }
+    //}
 
     //// Time complexity: O(n)
     #endregion
