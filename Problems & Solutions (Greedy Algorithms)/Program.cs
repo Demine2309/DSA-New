@@ -106,18 +106,98 @@
      *            a maximum subset S′ of S such that no pair of intervals in S′ overlaps. Check whether the following
      *            algorithm works or not.
      */
-    public class Solution
-    {
 
+    /*
+     * - Algorithm:
+     *          While (S is not empty){
+     *              Select the interval I that overlaps the least number of other intervals 
+     *              Add I to final solution set S'.
+     *              Remove all intervals from S that overlap with I
+     *          }
+     */
+
+    /*
+     * - Solution: This algorithm does not solve the problem of finding a maximum subset of non-overlapping intervals. 
+     * - Explain:       _____            ______
+     *                  _____            ______
+     *                  _____   ___c__   ______
+     *              ___m__  ___o__   ___n__   ___k__
+     *      + Result will be 'C' because the interval that overlaps with the fewest others is C
+     *      + Answer expect: {M, O, N, K}
+     */
+    #endregion
+
+    #region Problem 5
+    /*
+     * - Problem: In Problem-4, if we select the interval that starts earliest (also not overlapping with already chosen 
+     *            intervals), does it give the optimal solution?
+     */
+
+    // - Solution: Absolutely not.
+    #endregion
+
+    #region Problem 6
+    /*
+     * - Problem: In Problem-4, if we select the shortest interval (but it is not overlapping the already chosen intervals),
+     *            does it give the optimal solution?
+     */
+
+    // - Solution: This also will not give the optimal solution
+    #endregion
+
+    #region Problem 7. With above problem, what is the optimal solution?
+    /*
+     * - Algorithm: 
+     *      Sort intervals according to the right-most ends [end times];
+     *      for every consecutive(liên tiếp) interval{
+     *          - If the left-most end is after the right-most end of the last selected interval then we select this interval
+     *          - Other wise we skip it and go to the next interval
+     *      }
+     */
+
+    public class Interval
+    {
+        public string Name { get; set; }
+        public int Start { get; set; }
+        public int End { get; set; }
     }
 
-    class MainClass
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Solution solution = new Solution();
+            List<Interval> intervals = new List<Interval>
+        {
+            new Interval { Name = "A", Start = 7, End = 9 },
+            new Interval { Name = "B", Start = 6, End = 8 },
+            new Interval { Name = "C", Start = 6, End = 7 },
+            new Interval { Name = "D", Start = 4, End = 5 },
+            new Interval { Name = "E", Start = 3, End = 4 }
+        };
 
+            // Sort intervals according to the right-most ends [end times]
+            intervals.Sort((a, b) => a.End.CompareTo(b.End));
 
+            List<Interval> result = new List<Interval>();
+            int lastEnd = int.MinValue;
+
+            // For every consecutive interval
+            foreach (var interval in intervals)
+            {
+                // If the left-most end is after the right-most end of the last selected interval then we select this interval
+                if (interval.Start >= lastEnd)
+                {
+                    result.Add(interval);
+                    lastEnd = interval.End;
+                }
+                // Otherwise we skip it and go to the next interval
+            }
+
+            // Print the selected intervals
+            foreach (var interval in result)
+            {
+                Console.WriteLine($"{interval.Name}: [{interval.Start}, {interval.End}]");
+            }
         }
     }
     #endregion
