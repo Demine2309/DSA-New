@@ -1,4 +1,6 @@
-﻿namespace DSA
+﻿using System;
+
+namespace DSA
 {
     #region Problem 1
     /* - Problem: Given an array A[0...n– 1] of n numbers containing the repetition of some number.
@@ -100,53 +102,136 @@
      *   Assume that each vote is given as an integer representing the ID of the chosen candidate. Give an algorithm 
      *   for determining who wins the election.
      */
+    //public class Solution
+    //{
+    //    // First Way
+    //    public void WhoWinTheElection(int[] arr)
+    //    {
+    //        Dictionary<int, int> ID = new Dictionary<int, int>();
+
+    //        for (int i = 0; i < arr.Length; i++)
+    //        {
+    //            ID.Add(i + 1, arr[i]);
+    //        }
+
+    //        BucketSort(arr);
+
+    //        Console.WriteLine(GetKeyFromValue(ID, arr[arr.Length - 1]));
+    //    }
+
+    //    public void BucketSort(int[] arr)
+    //    {
+    //        int[] buckets = new int[arr.Max() + 1];
+
+    //        for (int j = 0; j < buckets.Length; j++)
+    //            buckets[j] = 0;
+
+    //        for (int i = 0; i < arr.Length; i++)
+    //            buckets[arr[i]]++;
+
+    //        for (int i = 0, j = 0; j < buckets.Length; j++)
+    //        {
+    //            for (int k = buckets[j]; k > 0; k--)
+    //            {
+    //                arr[i] = j;
+    //                i++;
+    //            }
+    //        }
+    //    }
+
+    //    private TKey GetKeyFromValue<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TValue value)
+    //    {
+    //        foreach (KeyValuePair<TKey, TValue> pair in dictionary)
+    //        {
+    //            if (pair.Value.Equals(value))
+    //                return pair.Key;
+    //        }
+
+    //        throw new Exception("Value not found in dictionary");
+    //    }
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+    //        int[] arr = { 34, 54, 12, 4, 23, 65, 2, 87, 2, 6, 9, 24 };
+
+    //        solution.WhoWinTheElection(arr);
+    //    }
+    //}
+    #endregion
+
+    #region Problem 6. Given an array A of n elements, each of which is an integer in the range [1, n^2], how do we sort the array in O(n) time?
+    /*
+     * * Solution: Using radix sort
+     *             If we subtract each number by 1 then we get the range [0, n^2 – 1]. If we consider all numbers as 2 –digit base n.Each digit 
+     *             ranges from 0 to n^2 – 1. Sort this using radix sort.This uses only two calls to counting sort.Finally, add 1 to all the numbers. 
+     *             Since there are 2 calls, the complexity is O(2n) ≈ O(n).
+    */
+
+    //public class Solution
+    //{
+    //    public void SortingArray(int[] arr)
+    //    {
+    //        int n = arr.Length;
+    //        Dictionary<float, int> myTable = new Dictionary<float, int>();
+
+    //        for(int i = 0; i < arr.Length; i++)
+    //        {
+    //            myTable.Add(arr[i], n ^ 2 / arr[i]);
+    //        }
+
+    //        for()
+    //    }    
+
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+
+
+    //    }
+    //}
+    #endregion
+
+    #region Problem 7. For Problem-6, what if the range is [1...n^3]?
+    //public class Solution
+    //{
+    //    public void SortingArray(int[] arr)
+    //    {
+    //        int n = arr.Length;
+    //    }
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+
+
+    //    }
+    //}
+    #endregion
+
+    #region Problem 8. Given an array with n integers, each of value less than n^100, can it be sorted in linear time?
+    // Solution: Yes
+    #endregion
+
+    #region Problem 9
+    /* 
+     * - Problem: Let A and B be two arrays of n elements each. Given a numbe K, give an O(nlogn) time algorithm for determining
+     *            whether there exists a ∈ A and b ∈ B such that a + b = K.
+    */
+
     public class Solution
     {
-        // First Way
-        public void WhoWinTheElection(int[] arr)
-        {
-            Dictionary<int, int> ID = new Dictionary<int, int>();
 
-            for (int i = 0; i < arr.Length; i++)
-            {
-                ID.Add(i + 1, arr[i]);
-            }
-
-            BucketSort(arr);
-
-            Console.WriteLine(GetKeyFromValue(ID, arr[arr.Length - 1]));
-        }
-
-        public void BucketSort(int[] arr)
-        {
-            int[] buckets = new int[arr.Max() + 1];
-
-            for (int j = 0; j < buckets.Length; j++)
-                buckets[j] = 0;
-
-            for (int i = 0; i < arr.Length; i++)
-                buckets[arr[i]]++;
-
-            for (int i = 0, j = 0; j < buckets.Length; j++)
-            {
-                for (int k = buckets[j]; k > 0; k--)
-                {
-                    arr[i] = j;
-                    i++;
-                }
-            }
-        }
-
-        private TKey GetKeyFromValue<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TValue value)
-        {
-            foreach (KeyValuePair<TKey, TValue> pair in dictionary)
-            {
-                if (pair.Value.Equals(value))
-                    return pair.Key;
-            }
-
-            throw new Exception("Value not found in dictionary");
-        }
     }
 
     class MainClass
@@ -154,14 +239,9 @@
         static void Main(string[] args)
         {
             Solution solution = new Solution();
-            int[] arr = { 34, 54, 12, 4, 23, 65, 2, 87, 2, 6, 9, 24 };
 
-            solution.WhoWinTheElection(arr);
+
         }
     }
-    #endregion
-
-    #region Problem 6. Given an array A of n elements, each of which is an integer in the range [1, n^2], how do we sort the array in O(n) time?
-
     #endregion
 }
