@@ -231,7 +231,47 @@ namespace DSA
 
     public class Solution
     {
+        public bool isExisting(int[] A, int[] B, int k)
+        {
+            MergeSort(A, 0, A.Length - 1);
 
+        }
+
+        private void MergeSort(int[] arr, int start, int end)
+        {
+            if (end > start)
+            {
+                int mid = (end + start) / 2;
+                MergeSort(arr, start, mid);
+                MergeSort(arr, mid + 1, end);
+                Merge(arr, start, mid, end);
+            }
+        }
+
+        private void Merge(int[] arr, int start, int mid, int end)
+        {
+            int p = start, q = mid + 1, k = 0;
+
+            int[] A = new int[end - start + 1];
+
+            for (int i = start; i <= end; i++)
+            {
+                if (p > mid)
+                    A[k++] = arr[q++];
+                else if (q > end)
+                    A[k++] = arr[p++];
+                else if (arr[p] < arr[q])
+                    A[k++] = arr[p++];
+                else
+                    A[k++] = arr[q++];
+            }
+
+            for (int j = 0; j < k; j++)
+            {
+                arr[start] = A[j];
+                start++;
+            }
+        }
     }
 
     class MainClass

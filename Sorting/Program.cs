@@ -200,61 +200,56 @@ namespace DSA
     #endregion
 
     #region Merge Sort
-    //class MainClass
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        int[] arr = { 12, 5, 6, 18, 1 }; // 12, 5, 3, 6, 8, 213, 45, 2, 0, 23
-    //        int[] temp = new int[arr.Length];
+    class MainClass
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 12, 5, 6, 18, 1 }; // 12, 5, 3, 6, 8, 213, 45, 2, 0, 23
 
-    //        MergeSort(arr, temp, 0, arr.Length - 1);
+            MergeSort(arr, 0, arr.Length - 1);
 
-    //        foreach (int i in arr)
-    //        {
-    //            Console.Write(i + "  ");
-    //        }
-    //    }
+            foreach (int i in arr)
+            {
+                Console.Write(i + "  ");
+            }
+        }
 
-    //    static void MergeSort(int[] arr, int[] temp, int left, int right)
-    //    {
-    //        if (right > left)
-    //        {
-    //            int mid = (right + left) / 2;
-    //            MergeSort(arr, temp, left, mid);
-    //            MergeSort(arr, temp, mid + 1, right);
-    //            Merge(arr, temp, left, mid + 1, right);
-    //        }
-    //    }
+        static void MergeSort(int[] arr, int start, int end)
+        {
+            if (end > start)
+            {
+                int mid = (end + start) / 2;
+                MergeSort(arr, start, mid);
+                MergeSort(arr, mid + 1, end);
+                Merge(arr, start, mid, end);
+            }
+        }
 
-    //    static void Merge(int[] arr, int[] temp, int left, int mid, int right)
-    //    {
-    //        int leftEnd, size, tempPos;
+        static void Merge(int[] arr, int start, int mid, int end)
+        {
+            int p = start, q = mid + 1, k = 0;
 
-    //        leftEnd = mid - 1;
-    //        tempPos = left;
-    //        size = right - left + 1;
+            int[] A = new int[end - start + 1];
 
-    //        while (left <= leftEnd && mid <= right)
-    //        {
-    //            if (arr[left] <= arr[mid])
-    //                temp[tempPos++] = arr[left++];
-    //            else
-    //                temp[tempPos++] = arr[mid++];
-    //        }
+            for (int i = start; i <= end; i++)
+            {
+                if (p > mid)
+                    A[k++] = arr[q++];
+                else if (q > end)
+                    A[k++] = arr[p++];
+                else if (arr[p] < arr[q])
+                    A[k++] = arr[p++];
+                else
+                    A[k++] = arr[q++];
+            }
 
-    //        while (left <= leftEnd)
-    //            temp[tempPos++] = arr[left++];
-
-    //        while (mid <= right)
-    //            temp[tempPos++] = arr[mid++];
-
-    //        for (int i = 0; i < size; i++)
-    //        {
-    //            arr[right] = temp[right];
-    //            right--;
-    //        }
-    //    }
-    //}
+            for (int j = 0; j < k; j++)
+            {
+                arr[start] = A[j];
+                start++;
+            }
+        }
+    }
 
     //// Time complexity: In 3 cases is O(nlogn)
     #endregion
@@ -366,45 +361,45 @@ namespace DSA
     #endregion
 
     #region Bucket Sort
-    public class Solution
-    {
-        public void BucketSort(int[] arr)
-        {
-            int[] buckets = new int[arr.Max() + 1];
+    //public class Solution
+    //{
+    //    public void BucketSort(int[] arr)
+    //    {
+    //        int[] buckets = new int[arr.Max() + 1];
 
-            for (int j = 0; j < buckets.Length; j++)
-                buckets[j] = 0;
+    //        for (int j = 0; j < buckets.Length; j++)
+    //            buckets[j] = 0;
 
-            for (int i = 0; i < arr.Length; i++)
-                buckets[arr[i]]++;
+    //        for (int i = 0; i < arr.Length; i++)
+    //            buckets[arr[i]]++;
 
-            for (int i = 0, j = 0; j < buckets.Length; j++)
-            {
-                for (int k = buckets[j]; k > 0; k--)
-                {
-                    arr[i] = j;
-                    i++;
-                }
-            }
-        }
-    }
+    //        for (int i = 0, j = 0; j < buckets.Length; j++)
+    //        {
+    //            for (int k = buckets[j]; k > 0; k--)
+    //            {
+    //                arr[i] = j;
+    //                i++;
+    //            }
+    //        }
+    //    }
+    //}
 
-    class MainClass
-    {
-        static void Main(string[] args)
-        {
-            Solution solution = new Solution();
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
 
-            int[] arr = { 12, 5, 3, 6, 8 };
+    //        int[] arr = { 12, 5, 3, 6, 8 };
 
-            solution.BucketSort(arr);
+    //        solution.BucketSort(arr);
 
-            foreach (int i in arr)
-            {
-                Console.Write(i + " ");
-            }
-        }
-    }
+    //        foreach (int i in arr)
+    //        {
+    //            Console.Write(i + " ");
+    //        }
+    //    }
+    //}
 
     //// Time complexity: O(n)
     #endregion
