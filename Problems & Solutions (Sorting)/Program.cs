@@ -229,58 +229,90 @@ namespace DSA
      *            whether there exists a ∈ A and b ∈ B such that a + b = K.
     */
 
+    //public class Solution
+    //{
+    //    public bool IsExisting(int[] A, int[] B, int k)
+    //    {
+    //        Array.Sort(B);
+
+    //        foreach(int a in A)
+    //        {
+    //            int complement = k - a;
+
+    //            if(Array.BinarySearch(B, complement) >= 0)
+    //                return true;
+    //        }
+
+    //        return false;
+    //    }
+
+    //    //private void MergeSort(int[] arr, int start, int end)
+    //    //{
+    //    //    if (end > start)
+    //    //    {
+    //    //        int mid = (end + start) / 2;
+    //    //        MergeSort(arr, start, mid);
+    //    //        MergeSort(arr, mid + 1, end);
+    //    //        Merge(arr, start, mid, end);
+    //    //    }
+    //    //}
+
+    //    //private void Merge(int[] arr, int start, int mid, int end)
+    //    //{
+    //    //    int p = start, q = mid + 1, k = 0;
+
+    //    //    int[] A = new int[end - start + 1];
+
+    //    //    for (int i = start; i <= end; i++)
+    //    //    {
+    //    //        if (p > mid)
+    //    //            A[k++] = arr[q++];
+    //    //        else if (q > end)
+    //    //            A[k++] = arr[p++];
+    //    //        else if (arr[p] < arr[q])
+    //    //            A[k++] = arr[p++];
+    //    //        else
+    //    //            A[k++] = arr[q++];
+    //    //    }
+
+    //    //    for (int j = 0; j < k; j++)
+    //    //    {
+    //    //        arr[start] = A[j];
+    //    //        start++;
+    //    //    }
+    //    //}
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+
+    //        int[] A = { 3, 5, 1, 4, 6, 2 };
+    //        int[] B = { 6, 3, 7, 2, 1, 8, 0 };
+    //        int k = 15;
+
+    //        Console.WriteLine(solution.IsExisting(A, B, k));
+    //    }
+    //}
+    #endregion
+
+    #region Problem 10
+    /*
+     * Problem: Let A,B and C be three arrays of n elements each. Given a number K, give an O(nlogn) time algorithm for 
+     *          determining whether there exists a ∈ A, b ∈ B and c ∈ C such that a + b + c = K.
+     */
     public class Solution
     {
-        public bool IsExisting(int[] A, int[] B, int k)
+        public bool IsExisting(int[] A, int[] B, int[] C, int k)
         {
+            Array.Sort(A);
             Array.Sort(B);
+            Array.Sort(C);
 
-            foreach(int a in A)
-            {
-                int complement = k - a;
 
-                if(Array.BinarySearch(B, complement) >= 0)
-                    return true;
-            }
-
-            return false;
         }
-
-        //private void MergeSort(int[] arr, int start, int end)
-        //{
-        //    if (end > start)
-        //    {
-        //        int mid = (end + start) / 2;
-        //        MergeSort(arr, start, mid);
-        //        MergeSort(arr, mid + 1, end);
-        //        Merge(arr, start, mid, end);
-        //    }
-        //}
-
-        //private void Merge(int[] arr, int start, int mid, int end)
-        //{
-        //    int p = start, q = mid + 1, k = 0;
-
-        //    int[] A = new int[end - start + 1];
-
-        //    for (int i = start; i <= end; i++)
-        //    {
-        //        if (p > mid)
-        //            A[k++] = arr[q++];
-        //        else if (q > end)
-        //            A[k++] = arr[p++];
-        //        else if (arr[p] < arr[q])
-        //            A[k++] = arr[p++];
-        //        else
-        //            A[k++] = arr[q++];
-        //    }
-
-        //    for (int j = 0; j < k; j++)
-        //    {
-        //        arr[start] = A[j];
-        //        start++;
-        //    }
-        //}
     }
 
     class MainClass
@@ -289,11 +321,13 @@ namespace DSA
         {
             Solution solution = new Solution();
 
-            int[] A = { 3, 5, 1, 4, 6, 2 };
-            int[] B = { 6, 3, 7, 2, 1, 8, 0 };
-            int k = 15;
+            int[] A = { 23, 4, 1, 4, 1, 3, 5, 2, 5, 7 };
+            int[] B = { 32, 4, 1, 8, 3, 34, 12, 3, 8, 6 };
+            int[] C = { 39, 16, 7, 2, 1, 2, 3, 13, 3, 9 };
 
-            Console.WriteLine(solution.IsExisting(A, B, k));
+            int k = 39;
+
+            Console.WriteLine(solution.IsExisting(A, B, C, k));
         }
     }
     #endregion
