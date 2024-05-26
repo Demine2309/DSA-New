@@ -303,15 +303,121 @@ namespace DSA
      * Problem: Let A,B and C be three arrays of n elements each. Given a number K, give an O(nlogn) time algorithm for 
      *          determining whether there exists a ∈ A, b ∈ B and c ∈ C such that a + b + c = K.
      */
+    //public class Solution
+    //{
+    //    public bool IsExisting(int[] A, int[] B, int[] C, int k)
+    //    {
+    //        Array.Sort(A);
+    //        Array.Sort(B);
+
+    //        foreach(int c in C)
+    //        {
+    //            int target = k - c;
+    //            int left = 0;
+    //            int right = A.Length - 1;
+
+    //            while (left < A.Length && right >= 0)
+    //            {
+    //                int sum = A[left] + B[right];
+
+    //                if (sum == target)
+    //                    return true;
+    //                else if (sum < target)
+    //                    left++;
+    //                else
+    //                    right--;
+    //            }
+    //        }
+
+    //        return false;
+    //    }
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+
+    //        int[] A = { 23, 4, 1, 4, 1, 3, 5, 2, 5, 7 };
+    //        int[] B = { 32, 4, 1, 8, 3, 34, 12, 3, 8, 6 };
+    //        int[] C = { 39, 16, 7, 2, 1, 2, 3, 13, 3, 9 };
+
+    //        int k = 39;
+
+    //        Console.WriteLine(solution.IsExisting(A, B, C, k));
+    //    }
+    //}
+    #endregion
+
+    #region Problem 16
+    /*
+     * Problem: Sort an array of 0’s, 1’s and 2’s: Given an array A[] consisting of 0’s, 1’s and 2’s, give an algorithm 
+     *          for sorting A[]. The algorithm should put all 0’s first, then all 1’s and all 2’s last.
+     *          Example: Input = {0,1,1,0,1,2,1,2,0,0,0,1}, Output = {0,0,0,0,0,1,1,1,1,1,2,2}
+     */
+    //public class Solution
+    //{
+    //    public void BucketSort(int[] arr)
+    //    {
+    //        int[] buckets = new int[arr.Max() + 1];
+
+    //        for (int j = 0; j < buckets.Length; j++)
+    //            buckets[j] = 0;
+
+    //        for (int i = 0; i < arr.Length; i++)
+    //            buckets[arr[i]]++;
+
+    //        for (int i = 0, j = 0; j < buckets.Length; j++)
+    //        {
+    //            for (int k = buckets[j]; k > 0; k--)
+    //            {
+    //                arr[i] = j;
+    //                i++;
+    //            }
+    //        }
+    //    }
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
+
+    //        int[] arr = { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
+
+    //        solution.BucketSort(arr);
+
+    //        foreach(int i in arr)
+    //        {
+    //            Console.Write(i + "  ");
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region Problem 18. How do we find the number that appeared the maximum number of times in an array?
     public class Solution
     {
-        public bool IsExisting(int[] A, int[] B, int[] C, int k)
+        public int NumberAppearMaxTimes(int[] arr)
         {
-            Array.Sort(A);
-            Array.Sort(B);
-            Array.Sort(C);
+            int[] buckets = new int[arr.Max() + 1];
+            int maxPos = 0;
 
+            for (int i = 0; i < buckets.Length; i++)
+                buckets[i] = 0;
 
+            for (int i = 0; i < arr.Length; i++)
+                buckets[arr[i]]++;
+
+            for (int i = 0; i < buckets.Length; i++)
+            {
+                    if (buckets[maxPos] < buckets[i])
+                        maxPos = i;           
+            }
+
+            return maxPos;
         }
     }
 
@@ -321,13 +427,9 @@ namespace DSA
         {
             Solution solution = new Solution();
 
-            int[] A = { 23, 4, 1, 4, 1, 3, 5, 2, 5, 7 };
-            int[] B = { 32, 4, 1, 8, 3, 34, 12, 3, 8, 6 };
-            int[] C = { 39, 16, 7, 2, 1, 2, 3, 13, 3, 9 };
+            int[] arr = { 12, 145, 46, 12, 5, 8, 4, 3, 5, 6, 6, 14, 7, 8, 8, 9, 7, 5, 4, 1, 2, 6, 48, 75, 2, 1, 3, 6, 12, 4, 5, 87, 6 };
 
-            int k = 39;
-
-            Console.WriteLine(solution.IsExisting(A, B, C, k));
+            Console.WriteLine(solution.NumberAppearMaxTimes(arr));
         }
     }
     #endregion
