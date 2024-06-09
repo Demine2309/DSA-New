@@ -398,39 +398,46 @@ namespace DSA
     #endregion
 
     #region Problem 18. How do we find the number that appeared the maximum number of times in an array?
-    public class Solution
-    {
-        public int NumberAppearMaxTimes(int[] arr)
-        {
-            int[] buckets = new int[arr.Max() + 1];
-            int maxPos = 0;
+    //public class Solution
+    //{
+    //    public int NumberAppearMaxTimes(int[] arr)
+    //    {
+    //        int[] buckets = new int[arr.Max() + 1];
+    //        int maxPos = 0;
 
-            for (int i = 0; i < buckets.Length; i++)
-                buckets[i] = 0;
+    //        for (int i = 0; i < buckets.Length; i++)
+    //            buckets[i] = 0;
 
-            for (int i = 0; i < arr.Length; i++)
-                buckets[arr[i]]++;
+    //        for (int i = 0; i < arr.Length; i++)
+    //            buckets[arr[i]]++;
 
-            for (int i = 0; i < buckets.Length; i++)
-            {
-                    if (buckets[maxPos] < buckets[i])
-                        maxPos = i;           
-            }
+    //        for (int i = 0; i < buckets.Length; i++)
+    //        {
+    //                if (buckets[maxPos] < buckets[i])
+    //                    maxPos = i;           
+    //        }
 
-            return maxPos;
-        }
-    }
+    //        return maxPos;
+    //    }
+    //}
 
-    class MainClass
-    {
-        static void Main(string[] args)
-        {
-            Solution solution = new Solution();
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Solution solution = new Solution();
 
-            int[] arr = { 12, 145, 46, 12, 5, 8, 4, 3, 5, 6, 6, 14, 7, 8, 8, 9, 7, 5, 4, 1, 2, 6, 48, 75, 2, 1, 3, 6, 12, 4, 5, 87, 6 };
+    //        int[] arr = { 12, 145, 46, 12, 5, 8, 4, 3, 5, 6, 6, 14, 7, 8, 8, 9, 7, 5, 4, 1, 2, 6, 48, 75, 2, 1, 3, 6, 12, 4, 5, 87, 6 };
 
-            Console.WriteLine(solution.NumberAppearMaxTimes(arr));
-        }
-    }
+    //        Console.WriteLine(solution.NumberAppearMaxTimes(arr));
+    //    }
+    //}
+    #endregion
+
+    #region Problem 21. Given a 2GB file with one string per line, which sorting algorithm would we use to sort the file and why?
+    /*
+     * - Solution: 
+     * 
+     */
     #endregion
 }
