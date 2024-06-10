@@ -436,8 +436,301 @@ namespace DSA
 
     #region Problem 21. Given a 2GB file with one string per line, which sorting algorithm would we use to sort the file and why?
     /*
-     * - Solution: 
+     * - Solution: When we have a size limit of 2GB, it means that we cannot bring all the data into the main memory
+     * - Algorithm: How much memory do we have available? Let's assume we have X MB of memory available. Divide the file into
+     *              K chunks, where X*K~2 GB
+     *              + Bring each chunk into memory and sort the lines as usual (any O(nlogn) algorithm).
+     *              + Save the lines back to the file.
+     *              + Now bring the next chunk into memory and sort.
+     *              + Once we’re done, merge them one by one; in the case of one set finishing, bring more data from the particular 
+     *                chunk.
      * 
      */
+    #endregion
+
+    #region Problem 27. Which sorting method is better for Linked Lists?
+    /*
+     * - Solution: Merge Sort is a better choice. At first appearance, merge sort may not be a good selection since the middle node 
+     *             is required to subdivide the given list into 2 sub-lists of equal length. We can easily solve this problem by moving 
+     *             the nodes alternatively to 2 lists. Then, sorting these 2 lists recursively and merging the results into a single list 
+     *             will sort the given one.
+     */
+
+    //public class ListNode
+    //{
+    //    public int Value;
+    //    public ListNode Next;
+
+    //    public ListNode(int value)
+    //    {
+    //        Value = value;
+    //        Next = null;
+    //    }
+    //}
+
+    //public class LinkedListMergeSort
+    //{
+    //    private ListNode Merge(ListNode left, ListNode right)
+    //    {
+    //        if (left == null) return right;
+    //        if(right == null) return left;
+
+    //        if(left.Value < right.Value)
+    //        {
+    //            left.Next = Merge(left.Next, right);
+    //            return left;
+    //        }
+    //        else
+    //        {
+    //            right.Next = Merge(left, right.Next);
+    //            return right;
+    //        }
+    //    }
+
+    //    private ListNode GetMiddle(ListNode head)
+    //    {
+    //        if (head == null || head.Next == null)
+    //            return head;
+
+    //        ListNode slow = head;
+    //        ListNode fast = head.Next;
+
+    //        while(fast != null && fast.Next != null)
+    //        {
+    //            slow = slow.Next;
+    //            fast = fast.Next.Next;
+    //        }
+
+    //        return slow;
+    //    }
+
+    //    public ListNode MergeSort(ListNode head)
+    //    {
+    //        if (head == null || head.Next == null)
+    //            return head;
+
+    //        ListNode middle = GetMiddle(head);
+    //        ListNode nextToMiddle = middle.Next;
+
+    //        middle.Next = null;
+
+    //        ListNode left = MergeSort(head);
+    //        ListNode right = MergeSort(nextToMiddle);
+
+    //        ListNode sortedList = Merge(left, right);
+
+    //        return sortedList;
+    //    }
+    //}
+
+    //public class LinkedListUtils
+    //{
+    //    // Function to create a linked list from an array
+    //    public ListNode CreateLinkedList(int[] values)
+    //    {
+    //        if (values.Length == 0)
+    //            return null;
+
+    //        ListNode head = new ListNode(values[0]);
+    //        ListNode current = head;
+
+    //        for (int i = 1; i < values.Length; i++)
+    //        {
+    //            current.Next = new ListNode(values[i]);
+    //            current = current.Next;
+    //        }
+
+    //        return head;
+    //    }
+
+    //    // Function to print the linked list
+    //    public void PrintLinkedList(ListNode head)
+    //    {
+    //        ListNode current = head;
+    //        while (current != null)
+    //        {
+    //            Console.Write(current.Value + " ");
+    //            current = current.Next;
+    //        }
+    //        Console.WriteLine();
+    //    }
+    //}
+
+    //class MainClass
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        LinkedListUtils utils = new LinkedListUtils();
+    //        LinkedListMergeSort sorter = new LinkedListMergeSort();
+
+    //        int[] values = { 12, 5, 48, 4, 6, 3, 2, 1 };
+    //        ListNode head = utils.CreateLinkedList(values);
+
+    //        Console.WriteLine("Original lists:");
+    //        utils.PrintLinkedList(head);
+
+    //        ListNode sortedHead = sorter.MergeSort(head);
+
+    //        Console.WriteLine("Sorted lists:");
+    //        utils.PrintLinkedList(sortedHead);
+
+    //        Console.ReadKey();
+    //    }
+    //}
+    #endregion
+
+    #region Problem 28. Can we implement Linked Lists Sorting with Quick Sort?
+    /*
+     * - Solution: The original Quick Sort cannot be used for sorting Singly Linked List. This is because we cannot move
+     *             backward in Singly Linked Lists. But we can modify the original Quick Sort and make it work for Singly 
+     *             Linked Lists.
+     */
+
+    public class ListNode
+    {
+        public int Value;
+        public ListNode Next;
+
+        public ListNode(int value)
+        {
+            Value = value;
+            Next = null;
+        }
+    }
+
+    public class LinkedListQuickSort
+    {
+        // Partition the linked list around the pivot
+        private ListNode Partition(ListNode head, ListNode end, out ListNode newHead, out ListNode newEnd)
+        {
+            ListNode pivot = end;
+            ListNode prev = null, cur = head, tail = pivot;
+            newHead = null;
+            newEnd = pivot;
+
+            while (cur != pivot)
+            {
+                if (cur.Value < pivot.Value)
+                {
+                    if (newHead == null)
+                        newHead = cur;
+
+                    prev = cur;
+                    cur = cur.Next;
+                }
+                else
+                {
+                    if (prev != null)
+                        prev.Next = cur.Next;
+                    ListNode temp = cur.Next;
+                    cur.Next = null;
+                    tail.Next = cur;
+                    tail = cur;
+                    cur = temp;
+                }
+            }
+
+            if (newHead == null)
+                newHead = pivot;
+
+            newEnd = tail;
+
+            return pivot;
+        }
+
+        // QuickSort recursive function
+        private ListNode QuickSortRecur(ListNode head, ListNode end)
+        {
+            if (head == null || head == end)
+                return head;
+
+            ListNode newHead = null, newEnd = null;
+            ListNode pivot = Partition(head, end, out newHead, out newEnd);
+
+            if (newHead != pivot)
+            {
+                ListNode temp = newHead;
+                while (temp.Next != pivot)
+                    temp = temp.Next;
+                temp.Next = null;
+
+                newHead = QuickSortRecur(newHead, temp);
+                temp = GetTail(newHead);
+                temp.Next = pivot;
+            }
+
+            pivot.Next = QuickSortRecur(pivot.Next, newEnd);
+
+            return newHead;
+        }
+
+        // Function to get the tail of the linked list
+        private ListNode GetTail(ListNode cur)
+        {
+            while (cur != null && cur.Next != null)
+                cur = cur.Next;
+            return cur;
+        }
+
+        // Main QuickSort function
+        public ListNode QuickSort(ListNode head)
+        {
+            ListNode tail = GetTail(head);
+            return QuickSortRecur(head, tail);
+        }
+    }
+
+    public class LinkedListUtils
+    {
+        // Function to create a linked list from an array
+        public ListNode CreateLinkedList(int[] values)
+        {
+            if (values.Length == 0)
+                return null;
+
+            ListNode head = new ListNode(values[0]);
+            ListNode current = head;
+
+            for (int i = 1; i < values.Length; i++)
+            {
+                current.Next = new ListNode(values[i]);
+                current = current.Next;
+            }
+
+            return head;
+        }
+
+        // Function to print the linked list
+        public void PrintLinkedList(ListNode head)
+        {
+            ListNode current = head;
+            while (current != null)
+            {
+                Console.Write(current.Value + " ");
+                current = current.Next;
+            }
+            Console.WriteLine();
+        }
+    }
+
+    class MainClass
+    {
+        static void Main(string[] args)
+        {
+            LinkedListUtils utils = new LinkedListUtils();
+            LinkedListQuickSort sorter = new LinkedListQuickSort();
+
+            int[] values = { 12, 5, 48, 4, 6, 3, 2, 1 };
+            ListNode head = utils.CreateLinkedList(values);
+
+            Console.WriteLine("Original list:");
+            utils.PrintLinkedList(head);
+
+            ListNode sortedHead = sorter.QuickSort(head);
+
+            Console.WriteLine("Sorted list:");
+            utils.PrintLinkedList(sortedHead);
+        }
+    }
     #endregion
 }
